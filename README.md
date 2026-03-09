@@ -23,7 +23,7 @@ These structures are empirically verified on GPT, LLaMA3 as well as vision (ViT)
 
 ## Practical Application: Symmetric Initialization
 
-The paper shows that initializing $W_{QK}$ symmetrically ($W_{QK} = W_{Q}W_{K^T}$at t=0) improves encoder model performance on NLP tasks, by aligning the initialization with the geometric structure the model naturally develops.
+The paper shows that initializing $W_{QK}$ symmetrically ($W_{QK}$ = $W_{Q}W_{K^T}$ at t=0) improves encoder model performance on NLP tasks, by aligning the initialization with the geometric structure the model naturally develops.
 
 
 ---
