@@ -5,10 +5,26 @@ Reproduction experiments for:
 > **The underlying structures of self-attention: symmetry, directionality, and emergent dynamics in Transformer training**  
 > [arXiv 2502.10927](https://arxiv.org/abs/2502.10927)
 
-We study how the **symmetry of W_QK = W_Q W_K^T** evolves during training and how initialising W_Q = W_K (symmetric init) affects learning dynamics, on two settings:
+We study how the **symmetry of** $W_{QK} = W_Q W_K^T$ evolves during training and how initialising $W_Q = W_K$ (symmetric init) affects learning dynamics, on two settings:
 
 - **BERT-Mini** on Wikipedia (Masked Language Modeling)
 - **ViT-6L** on CIFAR-10 (Image Classification)
+
+
+## Key Theoretical Results
+
+- **Bidirectional training (encoders, e.g., BERT)**  
+  → gradient updates induce **symmetry** in $W_{QK}$ (i.e., $W_{QK} ≈ W_QW_K^T$)
+
+- **Autoregressive training (decoders, e.g., GPT/LLaMA)**  
+  → updates induce **directionality** and **column dominance** in $W_{QK}$
+
+These structures are empirically verified on GPT, LLaMA3 as well as vision (ViT).
+
+## Practical Application: Symmetric Initialization
+
+The paper shows that initializing $W_{QK}$ symmetrically ($W_{QK} = W_{Q}W_{K^T}$at t=0) improves encoder model performance on NLP tasks, by aligning the initialization with the geometric structure the model naturally develops.
+
 
 ---
 
@@ -65,7 +81,7 @@ python scripts/train_bert.py --model symmetric --resume checkpoints/symmetric_be
 
 ## Symmetry score
 
-For a layer's attention matrices W_Q and W_K, we define:
+For a layer's attention matrices $W_Q$ and $W_K$, we define:
 
 $$s(W_{QK}) = \frac{\|W_{QK}^s\|_F^2 - \|W_{QK}^a\|_F^2}{\|W_{QK}\|_F^2} \in [-1, 1]$$
 
